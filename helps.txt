@@ -1,2 +1,3 @@
 pyuic5 -x app.ui -o app.py
 pyuic5 -x ui/personnel.ui -o class_ui/personnel_ui.py                                      
+pyuic5 -x ui/menu_principale.ui -o class_ui/menu_principale_ui.py 

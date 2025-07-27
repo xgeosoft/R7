@@ -52,4 +52,4 @@ class DBManager:
     def close(self):
         self.conn.close()
         
-        
+    
