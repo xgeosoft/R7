@@ -54,4 +54,23 @@ groupes_ethniques_benin = [
     "Autres ethnies"
 ]
         
-        
+situations_matrimoniales = [
+    "Célibataire",
+    "Marié(e)",
+    "Veuf / Veuve",
+    "Divorcé(e)",
+    "Séparé(e)",
+    "Pacsé(e)",
+    "Union libre",
+    "Fiancé(e)"
+]
+
+
+liste_religions = [
+    "Athé (e)",
+    "Christianisme",
+    "Islam",
+    "Religions traditionnelles",
+    "Autres religions",
+    "Sans religion"
+]
