@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import QWidget, QMessageBox,QTableWidgetItem,QFileDialog
 from PyQt5.QtCore import QDate, Qt
 from PyQt5.QtGui import QPixmap
 from datetime import datetime
+from utils.utilitaires import resource_path
 import time
 import shutil
 
@@ -16,6 +17,7 @@ class FenetrePersonnel(QWidget):
         self.ui = Ui_FenetrePersonnel()
         self.ui.setupUi(self)
         self.ncol_tableWidget_ui = 21
+        self.db_path = resource_path("data/database.db")
         
         # initialisation du formulaire
         #nom
@@ -30,6 +32,7 @@ class FenetrePersonnel(QWidget):
         self.ui.comboBox_ethnie.setCurrentIndex(-1) # pas de sélection par défaut
         ## nationalité
         self.ui.comboBox_nationalite.addItems(utilitaires.pays_liste_fr)
+        self.ui.comboBox_nationalite.setCurrentIndex(-1)
         #sexe
         self.ui.comboBox_sexe.setCurrentIndex(-1)
         # sit matrimoniale
@@ -72,7 +75,7 @@ class FenetrePersonnel(QWidget):
         numero_cnss = self.ui.txt_cnss.text()
         numero_rib = self.ui.txt_rib.text()
         
-        conn = sqlite3.connect("data/database.db")
+        conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()        
         
         if matricule == "":
@@ -128,7 +131,7 @@ class FenetrePersonnel(QWidget):
     def ajouter_personnel(self):
         
         try:
-            conn = sqlite3.connect("data/database.db")
+            conn = sqlite3.connect(self.db_path)
             cursor = conn.cursor()
             
             id = self.ui.txt_id.text()
@@ -199,7 +202,7 @@ class FenetrePersonnel(QWidget):
 
 
     def afficher_table_personnel(self):
-        conn = sqlite3.connect("data/database.db")
+        conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
         
         # sélectionner données
@@ -222,7 +225,7 @@ class FenetrePersonnel(QWidget):
             self.ui.tableWidget_personnel.clearContents() # effacer le visuel de la table et réactualiser
             
             if not chercher == "":
-                conn = sqlite3.connect("data/database.db")
+                conn = sqlite3.connect(self.db_path)
                 cursor = conn.cursor()
                 
                 # sélectionner données
@@ -260,7 +263,7 @@ class FenetrePersonnel(QWidget):
             )
             
             if reponse == QMessageBox.Yes:
-                conn = sqlite3.connect("data/database.db")
+                conn = sqlite3.connect(self.db_path)
                 cursor = conn.cursor()
                 req = "DELETE FROM personnel WHERE matricule = ?;"
                 cursor.execute(req,(matricule,))
@@ -325,7 +328,7 @@ class FenetrePersonnel(QWidget):
         date_creation = datetime.today()
         date_modification = datetime.today()
         
-        conn = sqlite3.connect("data/database.db")
+        conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
         
         if not id == "":
@@ -407,7 +410,7 @@ class FenetrePersonnel(QWidget):
 
         if len(row_data) == self.ncol_tableWidget_ui:
             personnel_id = row_data[0]
-            conn = sqlite3.connect("data/database.db")
+            conn = sqlite3.connect(self.db_path)
             cursor = conn.cursor()
             req = "SELECT * FROM  personnel WHERE id = ?"
             cursor.execute(req,(personnel_id))

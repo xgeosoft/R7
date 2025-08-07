@@ -1,3 +1,15 @@
+import os
+import sys
+
+def resource_path(relative_path):
+    """Retourne le chemin absolu pour les ressources (images, db...)"""
+    if getattr(sys, 'frozen', False):  # PyInstaller
+        base_path = sys._MEIPASS
+    else:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
+
+
 pays_liste_fr = [
     'Aruba', 'Afghanistan', 'Angola', 'Anguilla', 'Îles Åland', 'Albanie', 'Andorre',
     'Émirats arabes unis', 'Argentine', 'Arménie', 'Samoa américaines', 'Antarctique',
