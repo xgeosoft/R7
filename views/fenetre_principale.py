@@ -16,6 +16,9 @@ class FenetrePrincipale(QMainWindow):
 
         # Configuration de la barre de menu
         self.configurer_barre_menu()
+        
+        # Affichage par défaut de l'acceuil
+        self.ouvrir_formulaire_acceuil()
 
     def ouvrir_information_personnel(self):
         fenetre = FenetreProfilPersonnel()

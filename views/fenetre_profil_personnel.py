@@ -422,7 +422,7 @@ class FenetreProfilPersonnel(QWidget):
             if result != None:
                 pixmap = QPixmap(result[15])
                 self.ui.photo.setPixmap(pixmap.scaled(150, 150, Qt.KeepAspectRatio, Qt.SmoothTransformation))
-                self.ui.photo.setScaledContents(True)
+                self.ui.photo.setScaledContents(False)
                 
                 
                 # afficher les informations généraux
