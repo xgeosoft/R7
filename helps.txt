@@ -1,3 +1,7 @@
 pyuic5 -x app.ui -o app.py
 pyuic5 -x ui/personnel.ui -o class_ui/personnel_ui.py
 pyinstaller -F main.py
+
+
+pyinstaller --noconfirm --onefile --windowed --name "Rh7" --add-data "C:\Users\DELL\Desktop\QTAPP\R7\data;data/" --add-data "C:\Users\DELL\Desktop\QTAPP\R7\images;images/"  "C:\Users\DELL\Desktop\QTAPP\R7\main.py"
+

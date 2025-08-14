@@ -28,7 +28,7 @@ class FenetreChercherPersonnel(QDialog):
 
 
     def afficher_table_personnel(self):
-        conn = sqlite3.connect()
+        conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
         
         # sélectionner données
@@ -37,11 +37,12 @@ class FenetreChercherPersonnel(QDialog):
         data = cursor.fetchall() # recupérer les données
         conn.close()
         
-        row_index = 0
-        for row in data:
-            for col in range(self.ncol_tableWidget_ui): #afficher toes les colonnes
-                self.ui.tableWidget_personnel.setItem(row_index,col,QTableWidgetItem(str(row[col])))
-            row_index = row_index + 1
+        if data is not None:
+            row_index = 0
+            for row in data:
+                for col in range(self.ncol_tableWidget_ui): #afficher toes les colonnes
+                    self.ui.tableWidget_personnel.setItem(row_index,col,QTableWidgetItem(str(row[col])))
+                row_index = row_index + 1
             
         
     

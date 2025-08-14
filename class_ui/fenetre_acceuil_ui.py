@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from utils.utilitaires import resource_path
 
 
 class Ui_FenetreAcceuil(object):
@@ -23,14 +24,14 @@ class Ui_FenetreAcceuil(object):
         self.gridLayout.addItem(spacerItem, 0, 0, 1, 1)
         self.label_3 = QtWidgets.QLabel(FenetreAcceuil)
         self.label_3.setText("")
-        self.label_3.setPixmap(QtGui.QPixmap("ui\\../images/logos/XGEOSOFT.png"))
+        self.label_3.setPixmap(QtGui.QPixmap(resource_path("images/logos/XGEOSOFT.png")))
         self.label_3.setScaledContents(False)
         self.label_3.setAlignment(QtCore.Qt.AlignCenter)
         self.label_3.setObjectName("label_3")
         self.gridLayout.addWidget(self.label_3, 1, 1, 1, 1)
         self.label_2 = QtWidgets.QLabel(FenetreAcceuil)
         self.label_2.setText("")
-        self.label_2.setPixmap(QtGui.QPixmap("ui\\../images/logos/Rh7Bienvenu.png"))
+        self.label_2.setPixmap(QtGui.QPixmap(resource_path("images/logos/Rh7Bienvenu.png")))
         self.label_2.setObjectName("label_2")
         self.gridLayout.addWidget(self.label_2, 0, 1, 1, 1)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -46,7 +47,7 @@ class Ui_FenetreAcceuil(object):
 
     def retranslateUi(self, FenetreAcceuil):
         _translate = QtCore.QCoreApplication.translate
-        FenetreAcceuil.setWindowTitle(_translate("FenetreAcceuil", "Form"))
+        FenetreAcceuil.setWindowTitle(_translate("FenetreAcceuil", "Rh7"))
 
 
 if __name__ == "__main__":

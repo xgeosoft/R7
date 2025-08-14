@@ -1,9 +1,7 @@
 import sqlite3
 import os
 from  utils import utilitaires
-from class_ui.fenetre_profil_personnel_ui import Ui_FenetreProfilPersonnel
-from views.fenetre_acceuil import FenetreAcceuil
-from views.fenetre_demande import FenetreDemande
+from class_ui.fenetre_personnel_ui import Ui_FenetrePersonnel
 from PyQt5.QtWidgets import QWidget, QMessageBox,QTableWidgetItem,QFileDialog
 from PyQt5.QtCore import QDate, Qt
 from PyQt5.QtGui import QPixmap
@@ -13,14 +11,13 @@ import time
 import shutil
 
 
-class FenetreProfilPersonnel(QWidget):
+class FenetrePersonnel(QWidget):
     def __init__(self):
         super().__init__()
-        self.ui = Ui_FenetreProfilPersonnel()
+        self.ui = Ui_FenetrePersonnel()
         self.ui.setupUi(self)
         self.ncol_tableWidget_ui = 21
         self.db_path = resource_path("data/database.db")
-
         
         # initialisation du formulaire
         #nom
@@ -50,13 +47,12 @@ class FenetreProfilPersonnel(QWidget):
         self.ui.btn_afficher_tout.clicked.connect(self.afficher_table_personnel)
         self.ui.btn_modifier.clicked.connect(self.modifier_personnel)
         self.ui.btn_uploader_photo.clicked.connect(self.uploader_photo)
-        self.ui.btn_faire_demande.clicked.connect(self.faire_une_demande)
         
         self.ui.tableWidget_personnel.itemSelectionChanged.connect(self.selectionner_personnel)
         
         #fonctions
     def quitter_formulaire(self):
-        print(0)
+        self.close()
         
     def valider_formulaire(self,pour_ajout = True):
         erreur = []
@@ -202,7 +198,9 @@ class FenetreProfilPersonnel(QWidget):
             self.ui.tableWidget_personnel.clearContents()
             self.afficher_table_personnel()
         
-    
+        
+
+
     def afficher_table_personnel(self):
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
@@ -418,72 +416,56 @@ class FenetreProfilPersonnel(QWidget):
             req = "SELECT * FROM  personnel WHERE id = ?"
             cursor.execute(req,(personnel_id))
             result = cursor.fetchone()
+
+            pixmap = QPixmap(result[15])
+            self.ui.photo.setPixmap(pixmap.scaled(150, 150, Qt.KeepAspectRatio, Qt.SmoothTransformation))
+            self.ui.photo.setScaledContents(True)
             
-            if result != None:
-                pixmap = QPixmap(result[15])
-                self.ui.photo.setPixmap(pixmap.scaled(150, 150, Qt.KeepAspectRatio, Qt.SmoothTransformation))
-                self.ui.photo.setScaledContents(True)
-                
-                
-                # afficher les informations généraux
-                self.ui.txt_id.setText(str(result[0]))
-                self.ui.txt_matricule.setText(result[1])
-                self.ui.txt_npi.setText(result[2])
-                self.ui.txt_nom.setText(result[3])
-                self.ui.txt_prenom.setText(result[4])
-                self.ui.comboBox_sexe.setCurrentText(result[5])
-                self.ui.dateEdit_date_naissance.setDate(QDate.fromString(result[6], "yyyy-MM-dd"))
-                self.ui.comboBox_situation_matrimoniale.setCurrentText(result[7])
-                self.ui.comboBox_religion.setCurrentText(result[8])
-                self.ui.comboBox_ethnie.setCurrentText(result[9])
-                self.ui.comboBox_nationalite.setCurrentText(result[10])
-                self.ui.txt_telephone1.setText(result[11])
-                self.ui.txt_telephone2.setText(result[12])
-                self.ui.txt_adresse.setText(result[13])
-                self.ui.txt_email.setText(result[14])
-                self.ui.txt_url_photo.setText(result[15])
-                self.ui.txt_ifu.setText(result[16])
-                self.ui.txt_cnss.setText(result[17])
-                self.ui.txt_rib.setText(result[18])
+            
+            # afficher les informations généraux
+            self.ui.txt_id.setText(str(result[0]))
+            self.ui.txt_matricule.setText(result[1])
+            self.ui.txt_npi.setText(result[2])
+            self.ui.txt_nom.setText(result[3])
+            self.ui.txt_prenom.setText(result[4])
+            self.ui.comboBox_sexe.setCurrentText(result[5])
+            self.ui.dateEdit_date_naissance.setDate(QDate.fromString(result[6], "yyyy-MM-dd"))
+            self.ui.comboBox_situation_matrimoniale.setCurrentText(result[7])
+            self.ui.comboBox_religion.setCurrentText(result[8])
+            self.ui.comboBox_ethnie.setCurrentText(result[9])
+            self.ui.comboBox_nationalite.setCurrentText(result[10])
+            self.ui.txt_telephone1.setText(result[11])
+            self.ui.txt_telephone2.setText(result[12])
+            self.ui.txt_adresse.setText(result[13])
+            self.ui.txt_email.setText(result[14])
+            self.ui.txt_url_photo.setText(result[15])
+            self.ui.txt_ifu.setText(result[16])
+            self.ui.txt_cnss.setText(result[17])
+            self.ui.txt_rib.setText(result[18])
 
 
     def uploader_photo(self):
         nom_unique_fichier = ""
-        chemin_fichier = resource_path(QFileDialog.getOpenFileName(
+        chemin_fichier = QFileDialog.getOpenFileName(
             None,
             caption = "Sélectionner image",
             directory= "",
             filter= "image (*.png *.jpg *.bmp *.gif *.jpeg)",
-            options= QFileDialog.Option())[0])
+            options= QFileDialog.Option()
+        )
         
-        if len(chemin_fichier) > 0:
-            L = chemin_fichier.split(".")
+        if len(chemin_fichier[0]) > 0:
+            L = chemin_fichier[0].split(".")
             extension_fichier = "." + L[-1]
             nom_unique_fichier = str(time.time()) + extension_fichier
 
             nom_unique_fichier = str(time.time()) + extension_fichier
-            chemin_destination = resource_path("images/photos/" + nom_unique_fichier)
+            chemin_destination = "images/photos/" + nom_unique_fichier
 
             # Copie avec renommage
-            shutil.copy2(chemin_fichier, chemin_destination)
+            shutil.copy2(chemin_fichier[0], chemin_destination)
         
         if nom_unique_fichier != "":
             self.ui.txt_url_photo.setText(chemin_destination)
     
 
-
-    def faire_une_demande(self):
-        id = self.ui.txt_id.text()
-        if id != "":
-            self.fenetre_demande = FenetreDemande()
-            self.fenetre_demande.exec_()
-            self.fenetre_demande.ui.txt_id.setText(id)
-        else:
-            QMessageBox.information(self,"Demande","Impossible de procéder à une demande. Vous devez sélectionner un membre du personnel.")
-        
-        
-    def suivi_carriere(self):
-        print(0)
-        
-        
-        

@@ -2,7 +2,7 @@ import sqlite3
 from utils.utilitaires import resource_path
 
 class DBManager:
-    def __init__(self, db_path=resource_path("data/database.db")):
+    def __init__(self,db_path= resource_path("data/database.db")):
         self.conn = sqlite3.connect(db_path)
         self.cursor = self.conn.cursor()
             
@@ -30,8 +30,8 @@ class DBManager:
             date_creation DATE NOT NULL,
             date_modification DATE NOT NULL
             )"""
-            
         self.cursor.execute(req_personnel)
+        
         
         # create table query
         req_demande = """CREATE TABLE IF NOT EXISTS demande(
@@ -47,25 +47,27 @@ class DBManager:
             date_modification DATE NOT NULL,
             FOREIGN KEY (id_personnel) REFERENCES personnel(id)
             )"""
-
         self.cursor.execute(req_demande)
         
-                # create table query
-        req_service = """CREATE TABLE IF NOT EXISTS service(
+        
+        # create table query
+        req_suivi_carriere = """CREATE TABLE IF NOT EXISTS suivi_carriere(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             id_personnel INTEGER NOT NULL,  -- Clé étrangère
-            service_actuel TEXT NOT NULL,
-            description_des_tache TEXT,
+            service TEXT NOT NULL,
+            fonction TEXT NOT NULL,
+            statut TEXT NOT NULL,
+            description_tache TEXT,
+            date_prise_service DATE NOT NULL,
             autorisation_chef_service TEXT NOT NULL,
             autorisation_responsable_centre TEXT NOT NULL,
             date_creation DATE NOT NULL,
             date_modification DATE NOT NULL,
             FOREIGN KEY (id_personnel) REFERENCES personnel(id)
             )"""
-
-        self.cursor.execute(req_service)
+        self.cursor.execute(req_suivi_carriere)
         
-                
+        
         # create table query
         req_config_demande = """CREATE TABLE IF NOT EXISTS liste_demande(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -74,8 +76,28 @@ class DBManager:
             date_creation DATE NOT NULL,
             date_modification DATE NOT NULL
             )"""
-
         self.cursor.execute(req_config_demande)
+        
+        liste_parametre = [
+            ("service","liste_service",),
+            ("statut","liste_statut",),
+            ("fonction","liste_fonction",),
+            ("categorie","liste_categorie_professionnelle",),
+            ("grade","liste_grade",),
+            ("responsabilite","liste_autre_responsabilite",),
+        ]
+        
+        # create table query
+        for colonne,table_name in liste_parametre:   
+            req_liste_parametre = """CREATE TABLE IF NOT EXISTS """ + table_name + """(
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                """ + colonne + """ TEXT NOT NULL UNIQUE,
+                date_creation DATE NOT NULL,
+                date_modification DATE NOT NULL
+                )"""
+            self.cursor.execute(req_liste_parametre)
+        
+        
         
         # envoyer changement
         self.conn.commit()

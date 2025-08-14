@@ -71,11 +71,12 @@ class FenetreParametreDemande(QDialog):
         data = cursor.fetchall() # recupérer les données
         conn.close()
         
-        row_index = 0
-        for row in data:
-            for col in range(self.ncol_tableWidget_ui): #afficher toes les colonnes
-                self.ui.tableWidget_affichage.setItem(row_index,col,QTableWidgetItem(str(row[col])))
-            row_index = row_index + 1
+        if data is not None:
+            row_index = 0
+            for row in data:
+                for col in range(self.ncol_tableWidget_ui): #afficher toes les colonnes
+                    self.ui.tableWidget_affichage.setItem(row_index,col,QTableWidgetItem(str(row[col])))
+                row_index = row_index + 1
     
     def ajouter_configuration_demande(self):
         
@@ -83,36 +84,40 @@ class FenetreParametreDemande(QDialog):
             conn = sqlite3.connect(self.db_path)
             cursor = conn.cursor()
             
+            id = self.ui.txt_id.text()
             objet = self.ui.txt_objet.text()
             nbjours = self.ui.comboBox_nombrejours.currentText()
             date_creation = datetime.today()
             date_modification = datetime.today()
             
-            req = """
-                    INSERT INTO liste_demande (
-                        objet, nb_jours,
-                        date_creation, date_modification
-                    ) VALUES (?, ?, ?, ?);
-                """
-            cursor.execute(req, (
-                objet, nbjours,
-                date_creation, date_modification
-            ))
-            
-            conn.commit()
+            if id == "":
+                req = """
+                        INSERT INTO liste_demande (
+                            objet, nb_jours,
+                            date_creation, date_modification
+                        ) VALUES (?, ?, ?, ?);
+                    """
+                cursor.execute(req, (
+                    objet, nbjours,
+                    date_creation, date_modification,
+                ))
                 
-            # vérification d'ajout
-            if cursor.rowcount > 0: # verifier sur une ligne  est affecté à la table
-                msgbox = QMessageBox()
-                msgbox.setIcon(QMessageBox.Information)
-                msgbox.setWindowTitle("Vérification")
-                msgbox.setText("Succès !")
-                msgbox.exec_()
+                conn.commit()
+                    
+                # vérification d'ajout
+                if cursor.rowcount > 0: # verifier sur une ligne  est affecté à la table
+                    msgbox = QMessageBox()
+                    msgbox.setIcon(QMessageBox.Information)
+                    msgbox.setWindowTitle("Vérification")
+                    msgbox.setText("Succès !")
+                    msgbox.exec_()
+                else:
+                    msgbox = QMessageBox()
+                    msgbox.setIcon(QMessageBox.Critical)
+                    msgbox.setText("Echec d'enregistrement !")
+                    msgbox.exec_()
             else:
-                msgbox = QMessageBox()
-                msgbox.setIcon(QMessageBox.Critical)
-                msgbox.setText("Echec d'enregistrement !")
-                msgbox.exec_()
+                QMessageBox.critical(self,"Vérification","Ce type de demande existe déjà.")
         self.afficher_liste_configuration_demande()
     
     

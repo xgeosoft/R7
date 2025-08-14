@@ -262,11 +262,12 @@ class FenetreDemande(QDialog):
         data = cursor.fetchall() # recupérer les données
         conn.close()
         
-        row_index = 0
-        for row in data:
-            for col in range(self.ncol_tableWidget_ui): #afficher toes les colonnes
-                self.ui.tableWidget_affichage.setItem(row_index,col,QTableWidgetItem(str(row[col])))
-            row_index = row_index + 1
+        if data is not None:
+            row_index = 0
+            for row in data:
+                for col in range(self.ncol_tableWidget_ui): #afficher toes les colonnes
+                    self.ui.tableWidget_affichage.setItem(row_index,col,QTableWidgetItem(str(row[col])))
+                row_index = row_index + 1
             
     
     def selectionner_demande(self):
