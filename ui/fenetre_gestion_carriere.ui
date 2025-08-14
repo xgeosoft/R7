@@ -632,7 +632,7 @@ border-color: rgb(0, 0, 0);</string>
         </font>
        </property>
        <property name="text">
-        <string>Responsabilitées particulières :</string>
+        <string>Responsabilitées :</string>
        </property>
       </widget>
      </item>

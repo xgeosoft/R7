@@ -465,7 +465,7 @@ class Ui_FenetreSuiviCarriere(object):
         self.label_9.setText(_translate("FenetreSuiviCarriere", "Catégorie Socio-Professionnelle :"))
         self.comboBox_autorisation_chefservice.setItemText(0, _translate("FenetreSuiviCarriere", "Oui"))
         self.comboBox_autorisation_chefservice.setItemText(1, _translate("FenetreSuiviCarriere", "Non"))
-        self.label_10.setText(_translate("FenetreSuiviCarriere", "Responsabilitées particulières :"))
+        self.label_10.setText(_translate("FenetreSuiviCarriere", "Responsabilitées :"))
 
 
 if __name__ == "__main__":
