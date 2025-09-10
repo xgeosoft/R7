@@ -67,12 +67,12 @@ class FenetreStatistique(QDialog):
                 QMessageBox.warning(self, "Export Excel", f"Aucun rapport sélectionné.",QMessageBox.Ok)
             else:
                 self.cursor.execute(f"DROP TABLE IF EXISTS base_personnel;")
-                self.cursor.execute(f"CREATE TABLE base_personnel AS SELECT * FROM personnel p LEFT JOIN suivi_carriere c ON c.id_personnel = p.id WHERE c.date_prise_service = (SELECT MAX(date_prise_service) FROM suivi_carriere WHERE id_personnel = p.id LIMIT 1) AND p.personnel_actif = 'Oui';")
+                self.cursor.execute(f"CREATE TABLE base_personnel AS SELECT * FROM personnel p LEFT JOIN suivi_carriere c ON p.id = c.id_personnel WHERE c.date_prise_service = (SELECT MAX(date_prise_service) FROM suivi_carriere WHERE id_personnel = p.id LIMIT 1) AND p.personnel_actif = 'Oui';")
                 match self.type_rapport:
                     case 'Carrière du Personnel':
                         req = f"SELECT * FROM personnel p LEFT JOIN suivi_carriere c ON p.id = c.id_personnel ORDER BY p.id ASC, c.date_prise_service DESC"
                     case 'Base du Personnel':
-                        req = f"SELECT * FROM personnel p LEFT JOIN suivi_carriere c ON c.id_personnel = p.id WHERE c.date_prise_service = (SELECT MAX(date_prise_service) FROM suivi_carriere WHERE id_personnel = p.id LIMIT 1)"
+                        req = f"SELECT * FROM personnel p LEFT JOIN suivi_carriere c ON p.id = c.id_personnel WHERE c.date_prise_service = (SELECT MAX(date_prise_service) FROM suivi_carriere WHERE id_personnel = p.id LIMIT 1)"
                     case 'Base du Personnel Simplifiée':
                         req = f"SELECT id AS ID, matricule AS Matricule,npi AS NPI, nom AS Nom, prenom AS Prénoms, sexe AS Sexe, strftime('%Y', 'now') - strftime('%Y', date_naissance) - (strftime('%m-%d', 'now') < strftime('%m-%d', date_naissance)) AS Age, situation_matrimoniale AS SitMat , service AS Service, fonction AS Corps, statut AS statut, categorie||niveau_grade AS Grade, responsabilite AS Reponsabilité, date_prise_service AS 'Date de prise de service', banque AS Banque, numero_rib AS RIB, numero_ifu AS IFU, numero_cnss AS 'N° SECU', telephone1 AS 'Tel 1', telephone2 AS 'Tel 2', email AS Email  FROM base_personnel ORDER BY banque ASC"
                     case 'Effectif du personnel par service':
@@ -129,7 +129,7 @@ class FenetreStatistique(QDialog):
                 QMessageBox.warning(self, "Export Excel", f"Aucun rapport sélectionné.",QMessageBox.Ok)
             else:
                 self.cursor.execute(f"DROP TABLE IF EXISTS base_personnel;")
-                self.cursor.execute(f"CREATE TABLE base_personnel AS SELECT * FROM personnel p LEFT JOIN suivi_carriere c ON c.id_personnel = p.id WHERE c.date_prise_service = (SELECT MAX(date_prise_service) FROM suivi_carriere WHERE id_personnel = p.id LIMIT 1) AND p.personnel_actif = 'Oui';")
+                self.cursor.execute(f"CREATE TABLE base_personnel AS SELECT * FROM personnel p LEFT JOIN suivi_carriere c ON p.id = c.id_personnel WHERE c.date_prise_service = (SELECT MAX(date_prise_service) FROM suivi_carriere WHERE id_personnel = p.id LIMIT 1) AND p.personnel_actif = 'Oui';")
                 self.cursor.execute("SELECT COUNT(*) FROM base_personnel")
                 self.nombre_personnel = self.cursor.fetchone()
                 

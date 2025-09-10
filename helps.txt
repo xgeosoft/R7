@@ -9,9 +9,5 @@ pyinstaller --noconfirm --onefile --windowed --name "Rh7" --add-data "C:\Users\D
 
 pyinstaller --noconfirm --onedir --windowed --name "Rh7" --add-data "C:\Users\DELL\Desktop\QTAPP\R7\data;data/" --add-data "C:\Users\DELL\Desktop\QTAPP\R7\images;images/"  "C:\Users\DELL\Desktop\QTAPP\R7\main.py"
 
-            chemin_fichier = resource_path(QFileDialog.getSaveFileName(
-                None,
-                caption = "Save",
-                directory= "",
-                filter= "PDF (*.pdf)",
-                options= QFileDialog.Option())[0])
+
+pyinstaller --noconfirm --onefile --console --icon "C:\Users\DELL\Desktop\QTAPP\R7\images\icones\Rh7Bienvenu.ico" --name "Rh7" --add-data "C:\Users\DELL\Desktop\QTAPP\R7\data;data/" --add-data "C:\Users\DELL\Desktop\QTAPP\R7\images;images/" --add-data "C:\Users\DELL\Desktop\QTAPP\R7\utils;utils/"  "C:\Users\DELL\Desktop\QTAPP\R7\main.py"
