@@ -2,6 +2,7 @@ import sqlite3
 import os
 from  utils.utilitaires import resource_path
 from class_ui.fenetre_reinitialisation_ui import Ui_FenetreReinitialisation
+from views.fenetre_parametre_dossier import FenetreParametreDossier
 from PyQt5.QtWidgets import QWidget, QMessageBox,QTableWidgetItem,QFileDialog,QDialog
 from PyQt5.QtCore import QDate, Qt
 from PyQt5.QtGui import QPixmap
@@ -32,7 +33,11 @@ class FenetreReinitialiser(QDialog):
             tables.append("demande")
             
             # supprimer les photos
-            photo_path = resource_path("images/photos")
+            fenetre_dossier = FenetreParametreDossier()
+            if fenetre_dossier.photo_path == "":
+                photo_path = resource_path('')
+            else:
+                photo_path = fenetre_dossier.photo_path
 
             if os.path.exists(photo_path):
                 # Supprime seulement le contenu
