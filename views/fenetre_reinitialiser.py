@@ -55,7 +55,7 @@ class FenetreReinitialiser(QDialog):
             tables.append("suivi_carriere")
         if self.ui.checkBox_parametrage.isChecked() == True:
             QMessageBox.information(self,"Réinitialisation","Voulez-vous vraiment supprimer les données de paramétrage ? Cette action est irréversible.")
-            tables += ["liste_demande","liste_service","liste_statut","liste_fonction","liste_categorie_professionnelle","liste_grade","liste_autre_responsabilite"]
+            tables += ["liste_demande","liste_service","liste_statut","liste_fonction","liste_categorie_professionnelle","liste_grade","liste_autre_responsabilite","file_path"]
         
         if tables != [] and QMessageBox.warning(self,"Finalisation du processus de réinitialisation","Je souhaite poursuivre !",QMessageBox.No | QMessageBox.Yes) == QMessageBox.Yes:
             for table in tables:
