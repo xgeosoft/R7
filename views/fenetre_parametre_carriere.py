@@ -239,6 +239,7 @@ class FenetreParametreSuiviCarriere(QDialog):
 
         for table, widget in tables_widgets:
             widget.clearContents()
+            widget.setRowCount(1000)
             remplir_table(table, widget)
 
         conn.close()

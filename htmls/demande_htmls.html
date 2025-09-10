@@ -1,0 +1,63 @@
+<!DOCTYPE pdf>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Demande d'acte administratif</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+    <div class="container">
+        <div class="header">
+            <img src="images/ressources/entete.png" alt="Entête">
+            <h1>Sécrétariat Général du Ministère de la Santé</h1>
+            <h1>Direction Départementale de la Santé du Borgou</h1>
+            <h1>Centre Hospitalier Universitaire Départemental Borgou-Alibori</h1>
+            <h1>DEMANDE D'ACTE ADMINISTRATIF</h1>
+        </div>
+                
+        <table>
+            <tr>
+                <td>Demande N° : </td>
+                <td>{id}</td>
+                <td>Fait le :</td>
+                <td>{date_modification.strftime("%Y-%m-%d %H:%M")}</td>
+            </tr>
+        </table>
+        <h3>Données d'identifications</h3>
+        <table>
+            <tbody>
+                <tr><td>ID Personnel</td><td>{info_personnel[0]}</td></tr>
+                <tr><td>Matricule</td><td>{info_personnel[1]}</td></tr>
+                <tr><td>Nom</td><td>{info_personnel[2]}</td></tr>
+                <tr><td>Prénom(s)</td><td>{info_personnel[3]}</td></tr>
+                <tr><td>Sexe</td><td>{info_personnel[4]}</td></tr>
+                <tr><td>Age</td><td>{info_personnel[5]}</td></tr>
+            </tbody>
+        </table>
+        
+        <h3>Informations sur la demande</h3>
+        <table border="1px #0000">
+            <tbody>
+                <tr><td>Objet</td><td>{info_demande[0]}</td></tr>
+                <tr><td>Date de début</td><td>{info_demande[1]}</td></tr>
+                <tr><td>Date de fin</td><td>{info_demande[2]}</td></tr>
+                <tr><td>Autorisation du chef service</td><td>En attente</td></tr>
+            </tbody>
+        </table>
+
+        <table>
+
+            <tr>
+                <td>Le Chef Service</td>
+                <td>Le DAF</td>
+                <td>Le DG</td>
+            </tr>
+        </table>
+
+        <div class="qr-code-section">
+            <h3>Code QR</h3>
+            <p>Scannez ce code pour accéder aux données d'identification.</p>
+            229
+            <h4>Le CHUD-BA vous remercie !</h4>
+        </div>
+    </div>

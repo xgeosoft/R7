@@ -5,3 +5,13 @@ pyinstaller -F main.py
 
 pyinstaller --noconfirm --onefile --windowed --name "Rh7" --add-data "C:\Users\DELL\Desktop\QTAPP\R7\data;data/" --add-data "C:\Users\DELL\Desktop\QTAPP\R7\images;images/"  "C:\Users\DELL\Desktop\QTAPP\R7\main.py"
 
+
+
+pyinstaller --noconfirm --onedir --windowed --name "Rh7" --add-data "C:\Users\DELL\Desktop\QTAPP\R7\data;data/" --add-data "C:\Users\DELL\Desktop\QTAPP\R7\images;images/"  "C:\Users\DELL\Desktop\QTAPP\R7\main.py"
+
+            chemin_fichier = resource_path(QFileDialog.getSaveFileName(
+                None,
+                caption = "Save",
+                directory= "",
+                filter= "PDF (*.pdf)",
+                options= QFileDialog.Option())[0])

@@ -6,6 +6,10 @@ from views.fenetre_demande import FenetreDemande
 from views.fenetre_parametre_demande import FenetreParametreDemande
 from views.fenetre_parametre_carriere import FenetreParametreSuiviCarriere
 from views.fenetre_suivi_carriere import FenetreSuiviCarriere
+from views.fenetre_reinitialiser import FenetreReinitialiser
+from views.fenetre_parametre_profil_personnel import FenetreParametreProfilPersonnel
+from views.fenetre_statistique import FenetreStatistique
+from views.fenetre_parametre_dossier import FenetreParametreDossier
 
 class FenetrePrincipale(QMainWindow):
     def __init__(self):
@@ -45,6 +49,21 @@ class FenetrePrincipale(QMainWindow):
         fenetre = FenetreParametreSuiviCarriere()
         self.setCentralWidget(fenetre)  # widget vide = "page d'accueil"
 
+    def ouvrir_formulaire_parametre_profil_personnel(self):
+        fenetre = FenetreParametreProfilPersonnel()
+        self.setCentralWidget(fenetre)
+        
+    def ouvrir_formulaire_configuration_dossier(self):
+        fenetre = FenetreParametreDossier()
+        self.setCentralWidget(fenetre)
+        
+    def ouvrir_formulaire_statistique(self):
+        fenetre = FenetreStatistique()
+        self.setCentralWidget(fenetre)
+        
+    def ouvrir_formulaire_reinitialisation(self):
+        fenetre = FenetreReinitialiser()
+        self.setCentralWidget(fenetre)
 
     def configurer_barre_menu(self):
         # Barre de menu principale
@@ -55,6 +74,7 @@ class FenetrePrincipale(QMainWindow):
         menu_acceuil = menubar.addMenu("Accueil")
         menu_activites = menubar.addMenu("Activités")
         menu_document = menubar.addMenu("Documents")
+        menu_statistique = menubar.addMenu("Statistiques")
         menu_parametre = menubar.addMenu("Configurations")
         menu_aide = menubar.addMenu("Aides")
 
@@ -85,6 +105,10 @@ class FenetrePrincipale(QMainWindow):
         
         ########################################################################
         # Configurations
+        # suivi carrière
+        action_param_profil_personnel = QAction("Profil Personnel",self)
+        action_param_profil_personnel.triggered.connect(self.ouvrir_formulaire_parametre_profil_personnel)
+        menu_parametre.addAction(action_param_profil_personnel)
         
         # suivi carrière
         action_param_suivi_carriere = QAction("Carrières",self)
@@ -95,3 +119,21 @@ class FenetrePrincipale(QMainWindow):
         action_param_demande = QAction("Demandes",self)
         action_param_demande.triggered.connect(self.ouvrir_formulaire_parametre_demande)
         menu_parametre.addAction(action_param_demande)
+        
+        # dossier
+        action_param_dossier = QAction("Configuration des dossiers",self)
+        action_param_dossier.triggered.connect(self.ouvrir_formulaire_configuration_dossier)
+        menu_parametre.addAction(action_param_dossier)
+        
+        # reinitialisation
+        action_param_reinitialiser = QAction("Réinitialisation des données",self)
+        action_param_reinitialiser.triggered.connect(self.ouvrir_formulaire_reinitialisation)
+        menu_parametre.addAction(action_param_reinitialiser)
+        
+        ########################################################################
+        # STATISTIQUES
+        
+        # Action Statistiques
+        action_statistique = QAction("Rapports", self)
+        action_statistique.triggered.connect(self.ouvrir_formulaire_statistique)
+        menu_statistique.addAction(action_statistique)

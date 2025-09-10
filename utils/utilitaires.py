@@ -9,6 +9,9 @@ def resource_path(relative_path):
         base_path = os.path.abspath(".")
     return os.path.join(base_path, relative_path)
 
+sexe_fr = [
+    'M','F','Autres'
+]
 
 pays_liste_fr = [
     'Aruba', 'Afghanistan', 'Angola', 'Anguilla', 'Îles Åland', 'Albanie', 'Andorre',
@@ -65,6 +68,8 @@ groupes_ethniques_benin = [
     "Goun (Gun)",
     "Autres ethnies"
 ]
+
+sexe = ['M','F']
         
 situations_matrimoniales = [
     "Célibataire",
@@ -86,3 +91,95 @@ liste_religions = [
     "Autres religions",
     "Sans religion"
 ]
+
+
+css_code = """
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        font-size: 10pt;
+    }
+    .container {
+        width: 100%;
+        margin: 2px;
+        padding: 20px;
+    }
+    .header {
+        text-align: center;
+        align-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    .header img {
+        width: 500px;
+        height: auto;
+    }
+    h1, h3 {
+        text-align: center;
+        color: #333;
+    }
+    h1 {
+        font-size: 14pt;
+        color: #4166ce;
+        margin: 15px 0;
+        font-weight: 700;
+    }
+    h3 {
+        font-size: 12pt;
+        margin-top: 20px;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 5px;
+    }
+    .tabledemande {
+        width: 80%;
+        border-collapse: collapse;
+        margin-bottom: 5px;
+        border: 1px solid #000000;
+    }
+
+    .document_name {
+        font-size: 20pt;
+        color: #4166ce;
+        font-weight: 700;
+        margin-bottom: 2px;
+    }
+    
+    th,td {
+        padding: 7px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    .qr-code-section {
+        text-align: center;
+        margin-top: 30px;
+    }
+    .qr-code-section img {
+        width: 30px;
+        height: 30px;
+        border: 1px solid #ccc;
+    }
+
+    .responsable {
+        vertical-align: bottom;
+        margin-top: 30px;
+        align-content: flex-start;
+        display: flex; /* Ceci aligne les éléments sur une ligne */
+        justify-content: space-around; /* Distribu les éléments uniformément */
+        align-items: center; /* Aligne les éléments verticalement au centre */
+    }
+
+    .responsable tr,td {
+        text-align: center;
+        text-weight: 700;
+    }
+    
+    .footer {
+        text-align: center;
+        margin-top: 40px;
+        font-style: italic;
+        color: #666;
+    }
+"""

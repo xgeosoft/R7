@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>FenetreReinitialisation</class>
- <widget class="QWidget" name="FenetreReinitialisation">
+ <class>FenetreStatistique</class>
+ <widget class="QWidget" name="FenetreStatistique">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>837</width>
-    <height>429</height>
+    <width>1172</width>
+    <height>609</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,36 +24,15 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>813</width>
-        <height>405</height>
+        <width>1148</width>
+        <height>585</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_3">
        <item row="0" column="0">
         <layout class="QGridLayout" name="gridLayout">
-         <property name="leftMargin">
-          <number>100</number>
-         </property>
-         <property name="rightMargin">
-          <number>100</number>
-         </property>
-         <item row="3" column="0">
-          <widget class="QCheckBox" name="checkBox_carriere">
-           <property name="font">
-            <font>
-             <family>Corbel</family>
-             <pointsize>12</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>Suivi des carrières</string>
-           </property>
-          </widget>
-         </item>
          <item row="1" column="0">
-          <widget class="QCheckBox" name="checkBox_personnel">
+          <widget class="QLabel" name="label_14">
            <property name="font">
             <font>
              <family>Corbel</family>
@@ -63,49 +42,16 @@
             </font>
            </property>
            <property name="text">
-            <string>Informations sur le personnel</string>
+            <string>Type de rapport</string>
            </property>
           </widget>
          </item>
-         <item row="7" column="0">
-          <widget class="QPushButton" name="btn_reinitialiser_donnee">
-           <property name="font">
-            <font>
-             <family>Corbel</family>
-             <pointsize>12</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">background-color: rgb(255, 147, 147);</string>
-           </property>
-           <property name="text">
-            <string>Réinitialiser</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QCheckBox" name="checkBox_demande">
-           <property name="font">
-            <font>
-             <family>Corbel</family>
-             <pointsize>12</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>Informations sur les demandes</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0">
+         <item row="0" column="0" colspan="2">
           <widget class="QLabel" name="label">
            <property name="font">
             <font>
              <family>Corbel</family>
-             <pointsize>20</pointsize>
+             <pointsize>24</pointsize>
              <weight>75</weight>
              <bold>true</bold>
             </font>
@@ -117,12 +63,18 @@
             <string notr="true">color: rgb(132, 8, 255);</string>
            </property>
            <property name="text">
-            <string>Réinitialiser les données</string>
+            <string>Statistiques</string>
            </property>
           </widget>
          </item>
-         <item row="5" column="0">
-          <widget class="QCheckBox" name="checkBox_parametrage">
+         <item row="3" column="0" colspan="2">
+          <widget class="QPushButton" name="btn_pdf">
+           <property name="minimumSize">
+            <size>
+             <width>2</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="font">
             <font>
              <family>Corbel</family>
@@ -131,13 +83,22 @@
              <bold>true</bold>
             </font>
            </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(196, 219, 255);</string>
+           </property>
            <property name="text">
-            <string>Listes et paramétrages des formulaires</string>
+            <string>PDF</string>
            </property>
           </widget>
          </item>
-         <item row="4" column="0">
-          <widget class="QCheckBox" name="checkBox_document">
+         <item row="5" column="0" colspan="2">
+          <widget class="QPushButton" name="btn_dashboard">
+           <property name="minimumSize">
+            <size>
+             <width>2</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="font">
             <font>
              <family>Corbel</family>
@@ -146,33 +107,67 @@
              <bold>true</bold>
             </font>
            </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(196, 219, 255);</string>
+           </property>
            <property name="text">
-            <string>Documents</string>
+            <string>Dashboard</string>
            </property>
           </widget>
+         </item>
+         <item row="4" column="0" colspan="2">
+          <widget class="QPushButton" name="btn_excel">
+           <property name="minimumSize">
+            <size>
+             <width>2</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Corbel</family>
+             <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(196, 219, 255);</string>
+           </property>
+           <property name="text">
+            <string>Excel</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0" colspan="2">
+          <widget class="QComboBox" name="comboBox_type_rapport">
+           <property name="font">
+            <font>
+             <family>Corbel</family>
+             <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">border-bottom-color: rgb(0, 0, 0);</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="0">
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
          </item>
         </layout>
-       </item>
-       <item row="1" column="0">
-        <spacer name="verticalSpacer">
-         <property name="font">
-          <font>
-           <family>Corbel</family>
-           <pointsize>12</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
        </item>
       </layout>
      </widget>

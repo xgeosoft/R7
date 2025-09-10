@@ -1,13 +1,19 @@
 import sqlite3
 import os
+import qrcode
+import tempfile
+import base64
+from io import BytesIO
 from  utils import utilitaires
 from class_ui.fenetre_demande_ui import Ui_FenetreDemande
 from views.fenetre_parametre_demande import FenetreParametreDemande
 from views.fenetre_chercher_personnel import FenetreChercherPersonnel
-from PyQt5.QtWidgets import QWidget, QMessageBox,QTableWidgetItem,QFileDialog,QDialog
-from PyQt5.QtCore import QDate, Qt
-from PyQt5.QtGui import QPixmap
+from PyQt5.QtWidgets import QWidget, QMessageBox,QTableWidgetItem,QFileDialog,QDialog, QVBoxLayout
+from PyQt5.QtCore import QDate
+from PyQt5.QtGui import QPixmap,QTextDocument
+from PyQt5.QtPrintSupport import QPrinter,QPrintPreviewDialog
 from datetime import datetime
+
 from utils.utilitaires import resource_path
 import time
 import shutil
@@ -40,6 +46,8 @@ class FenetreDemande(QDialog):
         self.ui.btn_afficher_tout.clicked.connect(self.afficher_liste_demande)
         self.ui.btn_supprimer.clicked.connect(self.supprimer_demande)
         self.ui.btn_modifier.clicked.connect(self.modifier_demande)
+        self.ui.btn_demande_pdf.clicked.connect(self.generer_demande_pdf)
+        
         
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
@@ -291,6 +299,7 @@ class FenetreDemande(QDialog):
             self.ui.txt_description_demande.setText(str(result[5]))
             self.ui.comboBox_autorisation_chefservice.setCurrentText(str(result[6]))
             
+            return result[0]
     
     def initialiser_formulaire(self):
         # Réinitialisation des champs texte
@@ -342,7 +351,7 @@ class FenetreDemande(QDialog):
         date_fin = self.ui.date_fin.date().toString("yyyy-MM-dd")
         description = self.ui.txt_description_demande.toPlainText()
         autorisation_chef_service = self.ui.comboBox_autorisation_chefservice.currentText()
-        validation_demande = "Non"
+        validation_demande = "Oui"
         date_creation = datetime.today()
         date_modification = datetime.today()
         
@@ -396,5 +405,137 @@ class FenetreDemande(QDialog):
                         conn.close()
             self.ui.tableWidget_affichage.clearContents() # effacer le visuel de la table et réactualiser
             self.initialiser_formulaire()
+        
+    def generer_demande_pdf(self):
+        id_demande = self.selectionner_demande()
+        if not id_demande is None:
+              return self.demande_pdf(id_demande=id_demande)
+
+    def demande_pdf(self,id_demande):
+
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+
+        if not id_demande:
+            QMessageBox.information(self, "Erreur", "Vous devez sélectionner une demande.")
+        else:
+            # Récupération des informations du personnel et de la demande à partir de la BDD
+            # En utilisant les ID du formulaire, non des valeurs codées en dur
+            cursor.execute("""
+                SELECT objet, date_debut, date_fin, date_modification,description,id_personnel
+                FROM demande WHERE id = ?
+            """, (id_demande,))
+            info_demande = cursor.fetchone()
             
-      
+            if info_demande:
+                id_personnel = int(info_demande[5])
+                cursor.execute("""
+                    SELECT id, matricule, nom, prenom, sexe,
+                        (strftime('%Y', 'now') - strftime('%Y', date_naissance)) - 
+                        (strftime('%m-%d', 'now') < strftime('%m-%d', date_naissance)) AS Age
+                    FROM personnel WHERE id = ?
+                """, (id_personnel,))
+                info_personnel = cursor.fetchone()
+                
+                if not info_personnel or not info_demande:
+                    QMessageBox.critical(self, "Erreur", "Informations sur la demande ou le personnel non trouvées.")
+                    return
+
+                cursor.execute("""
+                    SELECT service, fonction, statut,responsabilite
+                    FROM suivi_carriere WHERE id_personnel = ? ORDER BY id DESC LIMIT 1
+                """, (id_personnel,))
+                info_dernier_poste = cursor.fetchone()
+                print(info_dernier_poste)
+                if not info_dernier_poste is None:
+                    html_poste = f"""
+                        <tr><th>Poste</th><th>-</th></tr>
+                        <tr><td>Service</td><td>{info_dernier_poste[0]} </td></tr>
+                        <tr><td>Corps</td><td>{info_dernier_poste[1]} </td></tr>
+                        <tr><td>Fonction</td><td>{info_dernier_poste[3]} </td></tr>
+                        <tr><td>Statut</td><td>{info_dernier_poste[2]} </td></tr>
+                        
+                    """
+                else:
+                    html_poste = ""
+                
+                # Génération du code QR
+                data_qr = f"ID_Demande={id_demande}&ID_Personnel={id_personnel}"
+                qr = qrcode.QRCode(
+                    version=3,
+                    error_correction=qrcode.constants.ERROR_CORRECT_L,
+                    box_size=3,
+                    border=1,
+                )
+                qr.add_data(data_qr)
+                qr.make(fit=True)
+                img = qr.make_image(fill_color="black", back_color="white")
+                
+                # Convertir l'image PIL en base64 pour l'intégrer dans le HTML
+                buffered = BytesIO()
+                img.save(buffered, format="PNG")
+                img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
+                qr_code_src = f"data:image/png;base64,{img_str}"
+
+                # Génération HTML avec CSS injecté et le code QR en base64
+                html = f"""
+                    <!DOCTYPE html>
+                    <html lang="fr">
+                    <head>
+                        <meta charset="UTF-8">
+                        <title>Demande d'acte administratif</title>
+                    </head>
+                    <body>
+                        <div class="container">
+                            <div class="header">
+                                <img src="{resource_path("images/ressources/entete.jpg")}" alt="Entête" width=800 height=165>
+                                <h1>Centre Hospitalier Universitaire Départemental Borgou-Alibori</h1>
+                                <div class="document_name">DEMANDE D'ACTE ADMINISTRATIF</div>
+                            </div>
+                            
+                            <table class = "tabledemande" width=800>
+                                <tr><td>Demande N°</td><td>{id_demande}</td>
+                                <td>Fait le : </td><td>{datetime.fromisoformat(info_demande[3]).strftime("%d/%m/%Y %H:%M:%S")}</td></tr>
+                            </table>
+
+                            <table class = "tabledemande" width=800 line-height=0.05 border=1 border-color="#ddd">
+                                <tr><th>Identification</th><th>-</th></tr>
+                                <tr><td>Matricule</td><td>{info_personnel[1]}</td></tr>
+                                <tr><td>Nom et Prénom (s)</td><td>{info_personnel[2] + " " + info_personnel[3]}</td></tr>
+                                <tr><td>Sexe</td><td>{info_personnel[4]}</td></tr>
+                                { html_poste }
+                                <tr><th>Demande</th><th>-</th></tr>
+                                <tr><td>Objet</td><td>{info_demande[0]}</td></tr>
+                                <tr><td>Description</td><td>{"-" if info_demande[4] == "" else info_demande[4]}</td></tr>
+                                <tr><td>Date de début</td><td>{datetime.fromisoformat(info_demande[1]).strftime("%d/%m/%Y")}</td></tr>
+                                <tr><td>Date de fin</td><td>{datetime.fromisoformat(info_demande[2]).strftime("%d/%m/%Y")}</td></tr>
+                            </table>
+
+                            <table class = "responsable" width = 800 border= "#fff">
+                                <tr>
+                                    <td>Le Chef service</td>
+                                    <td>Le DAF</td>
+                                    <td>Le DG</td>
+                                    <td><img src="{qr_code_src}" alt="Code QR de la demande"></td>
+                                </tr>
+                            </table>
+                            <div class="footer">
+                                <h4>Le CHUD-BA vous remercie !</h4>
+                            </div>
+                        </div>
+                    </body>
+                    </html>
+                """
+                
+                document = QTextDocument()
+                document.setDefaultStyleSheet(utilitaires.css_code)
+                document.setHtml(html)
+
+                # Créer un aperçu de l'imprimante
+                printer = QPrinter()
+                marge = -1000
+                printer.setPageMargins(marge, marge, marge, marge, QPrinter.Millimeter)
+
+                preview_dialog = QPrintPreviewDialog(printer, self)
+                preview_dialog.paintRequested.connect(document.print_)
+                preview_dialog.exec_()

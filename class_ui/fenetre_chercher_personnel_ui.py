@@ -99,7 +99,7 @@ class Ui_FenetreChercherPersonnel(object):
         self.tableWidget_personnel.setFrameShadow(QtWidgets.QFrame.Plain)
         self.tableWidget_personnel.setAlternatingRowColors(True)
         self.tableWidget_personnel.setObjectName("tableWidget_personnel")
-        self.tableWidget_personnel.setColumnCount(21)
+        self.tableWidget_personnel.setColumnCount(22)
         self.tableWidget_personnel.setRowCount(10)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget_personnel.setVerticalHeaderItem(0, item)
@@ -163,6 +163,8 @@ class Ui_FenetreChercherPersonnel(object):
         self.tableWidget_personnel.setHorizontalHeaderItem(19, item)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget_personnel.setHorizontalHeaderItem(20, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget_personnel.setHorizontalHeaderItem(21, item)
         self.gridLayout.addWidget(self.tableWidget_personnel, 5, 0, 1, 4)
         self.gridLayout_2.addLayout(self.gridLayout, 0, 0, 1, 1)
 
@@ -237,10 +239,12 @@ class Ui_FenetreChercherPersonnel(object):
         item = self.tableWidget_personnel.horizontalHeaderItem(17)
         item.setText(_translate("FenetreChercherPersonnel", "CNSS"))
         item = self.tableWidget_personnel.horizontalHeaderItem(18)
-        item.setText(_translate("FenetreChercherPersonnel", "RIB"))
+        item.setText(_translate("FenetreChercherPersonnel", "Banque"))
         item = self.tableWidget_personnel.horizontalHeaderItem(19)
-        item.setText(_translate("FenetreChercherPersonnel", "Date de création"))
+        item.setText(_translate("FenetreChercherPersonnel", "RIB"))
         item = self.tableWidget_personnel.horizontalHeaderItem(20)
+        item.setText(_translate("FenetreChercherPersonnel", "Date de création"))
+        item = self.tableWidget_personnel.horizontalHeaderItem(21)
         item.setText(_translate("FenetreChercherPersonnel", "Date de modification"))
 
 

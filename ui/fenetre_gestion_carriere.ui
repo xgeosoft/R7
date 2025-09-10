@@ -271,7 +271,12 @@ border-color: rgb(0, 0, 0);</string>
        </column>
        <column>
         <property name="text">
-         <string>Autres responsabilitées</string>
+         <string>Responsabilitées</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Description des tâches</string>
         </property>
        </column>
        <column>
@@ -282,6 +287,11 @@ border-color: rgb(0, 0, 0);</string>
        <column>
         <property name="text">
          <string>Autorisation du chef service</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Autorisation du responsable du centre</string>
         </property>
        </column>
        <column>
@@ -632,7 +642,7 @@ border-color: rgb(0, 0, 0);</string>
         </font>
        </property>
        <property name="text">
-        <string>Responsabilitées :</string>
+        <string>Responsabilités :</string>
        </property>
       </widget>
      </item>

@@ -22,23 +22,8 @@
      <property name="rightMargin">
       <number>150</number>
      </property>
-     <item row="3" column="2" colspan="2">
-      <widget class="QDateEdit" name="date_debut">
-       <property name="font">
-        <font>
-         <family>Corbel</family>
-         <pointsize>12</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0">
-      <widget class="QLabel" name="label_15">
+     <item row="7" column="0">
+      <widget class="QLabel" name="label_5">
        <property name="font">
         <font>
          <family>Corbel</family>
@@ -48,12 +33,43 @@
         </font>
        </property>
        <property name="text">
-        <string>Date de fin :</string>
+        <string>Autorisation chef service :</string>
        </property>
       </widget>
      </item>
-     <item row="5" column="2" colspan="5">
-      <widget class="QComboBox" name="comboBox_objet_demande">
+     <item row="6" column="1" colspan="6">
+      <widget class="QTextEdit" name="txt_description_demande">
+       <property name="font">
+        <font>
+         <family>Corbel</family>
+         <pointsize>12</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 255, 255);
+border-color: rgb(0, 0, 0);</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
+      <widget class="QLabel" name="label_3">
+       <property name="font">
+        <font>
+         <family>Corbel</family>
+         <pointsize>12</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Description :</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1" colspan="4">
+      <widget class="QLineEdit" name="txt_id_personnel">
        <property name="font">
         <font>
          <family>Corbel</family>
@@ -63,7 +79,56 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);</string>
+        <string notr="true">background-color: rgb(255, 255, 255);
+border-color: rgb(0, 0, 0);</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="7" colspan="2">
+      <widget class="QPushButton" name="btn_demande_pdf">
+       <property name="font">
+        <font>
+         <family>Corbel</family>
+         <pointsize>12</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(36, 198, 0);</string>
+       </property>
+       <property name="text">
+        <string>PDF</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="font">
+        <font>
+         <family>Corbel</family>
+         <pointsize>12</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Objet du congé :</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="7" colspan="2">
+      <widget class="QPushButton" name="btn_parametres">
+       <property name="font">
+        <font>
+         <family>Corbel</family>
+         <pointsize>12</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Paramètres</string>
        </property>
       </widget>
      </item>
@@ -85,23 +150,8 @@
        </property>
       </widget>
      </item>
-     <item row="4" column="2" colspan="2">
-      <widget class="QDateEdit" name="date_fin">
-       <property name="font">
-        <font>
-         <family>Corbel</family>
-         <pointsize>12</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="7" colspan="2">
-      <widget class="QPushButton" name="btn_parametres">
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_15">
        <property name="font">
         <font>
          <family>Corbel</family>
@@ -111,70 +161,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Paramètres</string>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="0">
-      <widget class="QLabel" name="label_2">
-       <property name="font">
-        <font>
-         <family>Corbel</family>
-         <pointsize>12</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Objet du congé :</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="7" colspan="2">
-      <widget class="QPushButton" name="btn_modifier">
-       <property name="font">
-        <font>
-         <family>Corbel</family>
-         <pointsize>12</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(188, 195, 255);</string>
-       </property>
-       <property name="text">
-        <string>Modifier</string>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="4" colspan="2">
-      <widget class="QLabel" name="label_5">
-       <property name="font">
-        <font>
-         <family>Corbel</family>
-         <pointsize>12</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Autorisation chef service :</string>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="0" colspan="3">
-      <widget class="QPushButton" name="btn_afficher_tout">
-       <property name="font">
-        <font>
-         <family>Corbel</family>
-         <pointsize>12</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Afficher tout</string>
+        <string>Date de fin :</string>
        </property>
       </widget>
      </item>
@@ -196,7 +183,132 @@
        </property>
       </widget>
      </item>
-     <item row="9" column="0" colspan="9">
+     <item row="3" column="7" colspan="2">
+      <widget class="QPushButton" name="btn_modifier">
+       <property name="font">
+        <font>
+         <family>Corbel</family>
+         <pointsize>12</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(188, 195, 255);</string>
+       </property>
+       <property name="text">
+        <string>Modifier</string>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="3" colspan="4">
+      <widget class="QLineEdit" name="txt_chercher">
+       <property name="font">
+        <font>
+         <family>Corbel</family>
+         <pointsize>12</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 255, 255);
+border-color: rgb(0, 0, 0);</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0" colspan="4">
+      <widget class="QLabel" name="label">
+       <property name="font">
+        <font>
+         <family>Corbel</family>
+         <pointsize>24</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(132, 8, 255);</string>
+       </property>
+       <property name="text">
+        <string>Demandes</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="1" colspan="3">
+      <widget class="QComboBox" name="comboBox_autorisation_chefservice">
+       <property name="font">
+        <font>
+         <family>Corbel</family>
+         <pointsize>12</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 255, 255);</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>Oui</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Non</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="1" column="5" colspan="2">
+      <widget class="QPushButton" name="btn_chercher">
+       <property name="font">
+        <font>
+         <family>Corbel</family>
+         <pointsize>12</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Chercher demande</string>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="0">
+      <widget class="QPushButton" name="btn_afficher_tout">
+       <property name="font">
+        <font>
+         <family>Corbel</family>
+         <pointsize>12</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Afficher tout</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_14">
+       <property name="font">
+        <font>
+         <family>Corbel</family>
+         <pointsize>12</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>ID</string>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="0" colspan="9">
       <widget class="QTableWidget" name="tableWidget_affichage">
        <row>
         <property name="text">
@@ -295,43 +407,7 @@
        </column>
       </widget>
      </item>
-     <item row="0" column="0" colspan="4">
-      <widget class="QLabel" name="label">
-       <property name="font">
-        <font>
-         <family>Corbel</family>
-         <pointsize>24</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(132, 8, 255);</string>
-       </property>
-       <property name="text">
-        <string>Demandes</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_14">
-       <property name="font">
-        <font>
-         <family>Corbel</family>
-         <pointsize>12</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>ID</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="2" colspan="3">
+     <item row="1" column="1" colspan="4">
       <widget class="QLineEdit" name="txt_id">
        <property name="enabled">
         <bool>false</bool>
@@ -350,6 +426,81 @@ border-color: rgb(0, 0, 0);</string>
        </property>
        <property name="text">
         <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1" colspan="3">
+      <widget class="QDateEdit" name="date_debut">
+       <property name="font">
+        <font>
+         <family>Corbel</family>
+         <pointsize>12</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 255, 255);</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1" colspan="3">
+      <widget class="QDateEdit" name="date_fin">
+       <property name="font">
+        <font>
+         <family>Corbel</family>
+         <pointsize>12</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 255, 255);</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1" colspan="6">
+      <widget class="QComboBox" name="comboBox_objet_demande">
+       <property name="font">
+        <font>
+         <family>Corbel</family>
+         <pointsize>12</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 255, 255);</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_12">
+       <property name="font">
+        <font>
+         <family>Corbel</family>
+         <pointsize>12</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>ID Personnel :</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="5" colspan="2">
+      <widget class="QPushButton" name="btn_chercher_employe">
+       <property name="font">
+        <font>
+         <family>Corbel</family>
+         <pointsize>12</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Chercher employé</string>
        </property>
       </widget>
      </item>
@@ -386,139 +537,6 @@ border-color: rgb(0, 0, 0);</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="5" colspan="2">
-      <widget class="QPushButton" name="btn_chercher_employe">
-       <property name="font">
-        <font>
-         <family>Corbel</family>
-         <pointsize>12</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Chercher employé</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="2" colspan="3">
-      <widget class="QLineEdit" name="txt_id_personnel">
-       <property name="font">
-        <font>
-         <family>Corbel</family>
-         <pointsize>12</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);
-border-color: rgb(0, 0, 0);</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="label_12">
-       <property name="font">
-        <font>
-         <family>Corbel</family>
-         <pointsize>12</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>ID Personnel :</string>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="0">
-      <widget class="QLabel" name="label_3">
-       <property name="font">
-        <font>
-         <family>Corbel</family>
-         <pointsize>12</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Description :</string>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="8">
-      <widget class="QPushButton" name="btn_chercher">
-       <property name="font">
-        <font>
-         <family>Corbel</family>
-         <pointsize>12</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Chercher</string>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="6">
-      <widget class="QComboBox" name="comboBox_autorisation_chefservice">
-       <property name="font">
-        <font>
-         <family>Corbel</family>
-         <pointsize>12</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);</string>
-       </property>
-       <item>
-        <property name="text">
-         <string>Oui</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Non</string>
-        </property>
-       </item>
-      </widget>
-     </item>
-     <item row="8" column="3" colspan="5">
-      <widget class="QLineEdit" name="txt_chercher">
-       <property name="font">
-        <font>
-         <family>Corbel</family>
-         <pointsize>12</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);
-border-color: rgb(0, 0, 0);</string>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="2" colspan="5">
-      <widget class="QTextEdit" name="txt_description_demande">
-       <property name="font">
-        <font>
-         <family>Corbel</family>
-         <pointsize>12</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);
-border-color: rgb(0, 0, 0);</string>
-       </property>
-      </widget>
-     </item>
     </layout>
    </item>
    <item row="1" column="0">
@@ -543,7 +561,6 @@ border-color: rgb(0, 0, 0);</string>
   <tabstop>date_debut</tabstop>
   <tabstop>date_fin</tabstop>
   <tabstop>comboBox_objet_demande</tabstop>
-  <tabstop>comboBox_autorisation_chefservice</tabstop>
   <tabstop>btn_nouveau</tabstop>
   <tabstop>btn_ajouter</tabstop>
   <tabstop>btn_modifier</tabstop>
@@ -551,7 +568,6 @@ border-color: rgb(0, 0, 0);</string>
   <tabstop>btn_supprimer</tabstop>
   <tabstop>btn_afficher_tout</tabstop>
   <tabstop>txt_chercher</tabstop>
-  <tabstop>btn_chercher</tabstop>
   <tabstop>tableWidget_affichage</tabstop>
  </tabstops>
  <resources/>
